@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/api/objects", cors(), (req, res) => {
-  res.json(JSON.stringify({ hello: "hello" }));
+  res.json({ hello: "hello" });
 });
 
 const host = "localhost";

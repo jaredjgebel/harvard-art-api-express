@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import ArtObject from "./components/Object/Object";
 
-const fetchInfo = async () => {
+const fetchObjects = async () => {
   try {
     const response = await fetch("/api/objects");
     return response.json();
@@ -12,36 +12,27 @@ const fetchInfo = async () => {
 };
 
 function App() {
-  const [info, setInfo] = useState("");
+  const [objects, setObjects] = useState("");
 
   useEffect(() => {
-    async function awaitInfo() {
-      const response = await fetchInfo();
-      setInfo(response.hello);
+    async function awaitObjects() {
+      const response = await fetchObjects();
+      setObjects(response);
     }
 
-    awaitInfo();
+    awaitObjects();
   }, []);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          {info}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const artObjects =
+    objects &&
+    objects.length &&
+    objects.map((obj, i) => (
+      <>
+        <ArtObject object={obj} />
+      </>
+    ));
+
+  return <div className="App">{artObjects}</div>;
 }
 
 export default App;

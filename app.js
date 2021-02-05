@@ -12,9 +12,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/api/objects", cors(), async (req, res) => {
+  const page = (req && req.query && req.query.page) || 1;
   let config = {
     method: "get",
-    url: `https://api.harvardartmuseums.org/object?apikey=${process.env.APIKEY}&hasimage=1`,
+    url: `https://api.harvardartmuseums.org/object?apikey=${process.env.APIKEY}&hasimage=1&page=${page}`,
   };
 
   try {

@@ -1,34 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 import "./App.css";
-import ArtObject from "./components/Object/Object";
+import ArtObject from "./components/object/Object";
 
-const fetchObjects = async () => {
+const getObjectUrl = (page) => `/api/objects?page=${page}`;
+
+const getObjects = async ({ page }) => {
   try {
-    const response = await fetch("/api/objects");
-    return response.json();
+    const response = await fetch(`/api/objects?page=1`, {
+      method: "GET",
+    });
+
+    const json = await response.json();
+
+    if (response.error) throw new Error(response.error);
+
+    return json;
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
-
 function App() {
-  const [objects, setObjects] = useState("");
+  const { isLoading, isError, data, error } = useQuery("objects", getObjects);
+  console.log(data);
 
-  useEffect(() => {
-    async function awaitObjects() {
-      const response = await fetchObjects();
-      setObjects(response);
-    }
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
-    awaitObjects();
-  }, []);
+  if (isError) {
+    return <p>Error loading data: {error}</p>;
+  }
 
   const artObjects =
-    objects &&
-    objects.length &&
-    objects.map((obj, i) => (
+    data &&
+    data.length &&
+    data.map((obj, i) => (
       <>
-        <ArtObject object={obj} />
+        <ArtObject object={obj} key={i} />
       </>
     ));
 

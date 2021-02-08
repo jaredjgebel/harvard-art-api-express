@@ -1,9 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
-import "./App.css";
-import ArtObject from "./components/object/Object";
+import ArtObject from "./components/art-object/ArtObject";
 
-const getObjectUrl = (page) => `/api/objects?page=${page}`;
+// const getObjectUrl = (page) => `/api/objects?page=${page}`;
 
 const getObjects = async ({ page }) => {
   try {
@@ -20,6 +19,7 @@ const getObjects = async ({ page }) => {
     throw new Error(error);
   }
 };
+
 function App() {
   const { isLoading, isError, data, error } = useQuery("objects", getObjects);
   console.log(data);
@@ -36,9 +36,9 @@ function App() {
     data &&
     data.length &&
     data.map((obj, i) => (
-      <>
-        <ArtObject object={obj} key={i} />
-      </>
+      <div key={i}>
+        <ArtObject object={obj} />
+      </div>
     ));
 
   return <div className="App">{artObjects}</div>;

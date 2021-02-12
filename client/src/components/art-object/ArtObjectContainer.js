@@ -1,34 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 import ArtObject from "./ArtObject";
+import useApi from "../../hooks/useApi";
 
 function ArtObjectContainer() {
-  const [data, setData] = useState({ hits: [] });
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
-  const [url, setUrl] = useState("/api/objects?page=1");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsError(false);
-      setIsLoading(true);
-
-      try {
-        const result = await axios(url);
-        console.log("result", result);
-
-        setData({ hits: result.data });
-      } catch (error) {
-        setIsError(true);
-      }
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, [url]);
+  const [{ data, isLoading, isError }, setUrl] = useApi();
 
   return (
     <>

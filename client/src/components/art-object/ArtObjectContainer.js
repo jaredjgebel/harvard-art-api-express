@@ -1,58 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-import { useQuery } from "react-query";
 import ArtObject from "./ArtObject";
-
-// const getObjectUrl = (page) => `/api/objects?page=${page}`;
-
-const getObjects = async ({ queryKey }) => {
-  const page = queryKey[1];
-
-  try {
-    const response = await fetch(`/api/objects?page=${page}`, {
-      method: "GET",
-    });
-
-    const json = await response.json();
-
-    if (response.error) throw new Error(response.error);
-
-    return json;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+import useGetObjects from "../../hooks/useGetObjects";
 
 function ArtObjectContainer() {
+  const [data, setData] = useState({ hits: [] });
   const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
+  const [url, setUrl] = useState("/api/objects?page=1");
 
-  const { isLoading, isError, data, error } = useQuery(
-    ["objects", page],
-    getObjects
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(url);
+      console.log("result", result);
+      setData({ hits: result.data });
+    };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (isError) {
-    return <p>Error loading data: {error}</p>;
-  }
-
-  const artObjects =
-    data &&
-    data.length &&
-    data.map((obj, i) => (
-      <div key={i}>
-        <ArtObject object={obj} />
-      </div>
-    ));
+    fetchData();
+  }, [url]);
 
   return (
-    <div className="App">
-      <button onClick={() => setPage(page + 1)}>Next Page</button>
-      {artObjects}
-    </div>
+    <>
+      <input
+        type="number"
+        value={page}
+        onChange={(event) => {
+          setPage(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        value={query}
+        onChange={(event) => {
+          setQuery(event.target.value);
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => setUrl(`/api/objects?page=${page}&query=${query}`)}
+      >
+        Search
+      </button>
+      <ul>
+        {data.hits.map((item) => (
+          <li key={item.id}>
+            <ArtObject object={item} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 

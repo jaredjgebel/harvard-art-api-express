@@ -5,9 +5,11 @@ const axios = require("axios");
 
 router.get("/objects", cors(), async (req, res) => {
   const page = (req && req.query && req.query.page) || 1;
+  const searchTerm = req && req.query && req.query.query;
+
   let config = {
     method: "get",
-    url: `https://api.harvardartmuseums.org/object?apikey=${process.env.APIKEY}&hasimage=1&page=${page}`,
+    url: `https://api.harvardartmuseums.org/object?apikey=${process.env.APIKEY}&hasimage=1&page=${page}&title=${searchTerm}`,
   };
 
   try {

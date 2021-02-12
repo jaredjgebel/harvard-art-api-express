@@ -9,13 +9,21 @@ function ArtObjectContainer() {
   const [query, setQuery] = useState("");
   const [url, setUrl] = useState("/api/objects?page=1");
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsError(false);
       setIsLoading(true);
-      const result = await axios(url);
-      console.log("result", result);
-      setData({ hits: result.data });
+
+      try {
+        const result = await axios(url);
+        console.log("result", result);
+
+        setData({ hits: result.data });
+      } catch (error) {
+        setIsError(true);
+      }
       setIsLoading(false);
     };
 
@@ -24,26 +32,31 @@ function ArtObjectContainer() {
 
   return (
     <>
-      <input
-        type="number"
-        value={page}
-        onChange={(event) => {
-          setPage(event.target.value);
+      <form
+        onSubmit={(event) => {
+          setUrl(`/api/objects?page=${page}&query=${query}`);
+          event.preventDefault();
         }}
-      />
-      <input
-        type="text"
-        value={query}
-        onChange={(event) => {
-          setQuery(event.target.value);
-        }}
-      />
-      <button
-        type="button"
-        onClick={() => setUrl(`/api/objects?page=${page}&query=${query}`)}
       >
-        Search
-      </button>
+        <input
+          type="number"
+          value={page}
+          onChange={(event) => {
+            setPage(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          value={query}
+          onChange={(event) => {
+            setQuery(event.target.value);
+          }}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {isError && <p>Something went wrong. Please try again. </p>}
+
       {isLoading ? (
         <p>Loading...</p>
       ) : (

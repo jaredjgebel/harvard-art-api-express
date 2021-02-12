@@ -1,33 +1,58 @@
-import React, { useEffect, useState } from "react";
+// pattern courtesy of https://www.robinwieruch.de/react-hooks-fetch-data
+import { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 
-const useApi = () => {
-  const [data, setData] = useState({ hits: [] });
-  const [url, setUrl] = useState("/api/objects?page=1");
+const dataFetchReducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_INIT":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload,
+      };
+    case "FETCH_FAILURE":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    default:
+      throw new Error();
+  }
+};
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+const useApi = (initialUrl, initialData) => {
+  const [url, setUrl] = useState(initialUrl);
+  const [state, dispatch] = useReducer(dataFetchReducer, {
+    isLoading: false,
+    isError: false,
+    data: initialData,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsError(false);
-      setIsLoading(true);
+      dispatch({ type: "FETCH_INIT" });
 
       try {
         const result = await axios(url);
-        console.log("result", result);
 
-        setData({ hits: result.data });
+        dispatch({ type: "FETCH_SUCCESS", payload: { hits: result.data } });
       } catch (error) {
-        setIsError(true);
+        dispatch({ type: "FETCH_FAILURE" });
       }
-      setIsLoading(false);
     };
 
     fetchData();
   }, [url]);
 
-  return [{ data, isLoading, isError }, setUrl];
+  return [state, setUrl];
 };
 
 export default useApi;

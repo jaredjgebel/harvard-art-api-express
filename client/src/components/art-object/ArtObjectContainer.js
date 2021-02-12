@@ -7,7 +7,9 @@ function ArtObjectContainer() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
 
-  const [{ data, isLoading, isError }, setUrl] = useApi();
+  const [{ data, isLoading, isError }, setUrl] = useApi("/api/objects?page=1", {
+    hits: [],
+  });
 
   return (
     <>

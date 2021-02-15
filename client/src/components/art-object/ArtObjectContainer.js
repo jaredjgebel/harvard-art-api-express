@@ -9,6 +9,7 @@ function ArtObjectContainer() {
 
   const [{ data, isLoading, isError }, setUrl] = useApi("/api/objects?page=1", {
     hits: [],
+    pageInfo: {},
   });
 
   return (
@@ -35,19 +36,30 @@ function ArtObjectContainer() {
         />
         <button type="submit">Search</button>
       </form>
-
       {isError && <p>Something went wrong. Please try again. </p>}
 
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
-          {data.hits.map((item) => (
-            <li key={item.id}>
-              <ArtObject object={item} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <div className="page-info">
+            <p>
+              Page {data.pageInfo && data.pageInfo.page} of{" "}
+              {data.pageInfo && data.pageInfo.pages}
+            </p>
+            <p>
+              {data.pageInfo && data.pageInfo.totalrecords} total results found
+            </p>
+          </div>
+          <ul>
+            {data.hits &&
+              data.hits.map((item) => (
+                <li key={item.id}>
+                  <ArtObject object={item} />
+                </li>
+              ))}
+          </ul>
+        </>
       )}
     </>
   );

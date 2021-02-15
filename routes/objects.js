@@ -14,8 +14,9 @@ router.get("/objects", cors(), async (req, res) => {
 
   try {
     const response = await axios(config);
-
-    res.status(200).json(response.data.records);
+    res
+      .status(200)
+      .json({ records: response.data.records, pageInfo: response.data.info });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

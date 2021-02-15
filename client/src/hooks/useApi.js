@@ -42,8 +42,15 @@ const useApi = (initialUrl, initialData) => {
 
       try {
         const result = await axios(url);
+        console.log("result", result.data);
 
-        dispatch({ type: "FETCH_SUCCESS", payload: { hits: result.data } });
+        dispatch({
+          type: "FETCH_SUCCESS",
+          payload: {
+            hits: result.data.records,
+            pageInfo: result.data.pageInfo,
+          },
+        });
       } catch (error) {
         dispatch({ type: "FETCH_FAILURE" });
       }

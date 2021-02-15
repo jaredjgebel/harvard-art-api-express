@@ -4,13 +4,15 @@ import ArtObject from "./ArtObject";
 import useApi from "../../hooks/useApi";
 
 function ArtObjectContainer() {
-  const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   const [{ data, isLoading, isError }, setUrl] = useApi("/api/objects?page=1", {
     hits: [],
     pageInfo: {},
   });
+
+  const { hits, pageInfo } = data;
 
   return (
     <>
@@ -23,6 +25,8 @@ function ArtObjectContainer() {
         <input
           type="number"
           value={page}
+          min={1}
+          max={pageInfo?.pages}
           onChange={(event) => {
             setPage(event.target.value);
           }}
@@ -32,10 +36,12 @@ function ArtObjectContainer() {
           value={query}
           onChange={(event) => {
             setQuery(event.target.value);
+            setPage(1);
           }}
         />
         <button type="submit">Search</button>
       </form>
+
       {isError && <p>Something went wrong. Please try again. </p>}
 
       {isLoading ? (
@@ -44,16 +50,13 @@ function ArtObjectContainer() {
         <>
           <div className="page-info">
             <p>
-              Page {data.pageInfo && data.pageInfo.page} of{" "}
-              {data.pageInfo && data.pageInfo.pages}
+              Page {pageInfo?.page} of {pageInfo?.pages}
             </p>
-            <p>
-              {data.pageInfo && data.pageInfo.totalrecords} total results found
-            </p>
+            <p>{pageInfo?.totalrecords} total results found</p>
           </div>
           <ul>
-            {data.hits &&
-              data.hits.map((item) => (
+            {hits.length &&
+              hits.map((item) => (
                 <li key={item.id}>
                   <ArtObject object={item} />
                 </li>

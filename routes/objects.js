@@ -5,7 +5,7 @@ const axios = require("axios");
 
 router.get("/objects", cors(), async (req, res) => {
   const page = (req && req.query && req.query.page) || 1;
-  const searchTerm = req && req.query && req.query.query;
+  const searchTerm = (req && req.query && req.query.query) || "";
 
   let config = {
     method: "get",
@@ -14,9 +14,14 @@ router.get("/objects", cors(), async (req, res) => {
 
   try {
     const response = await axios(config);
-    res
-      .status(200)
-      .json({ records: response.data.records, pageInfo: response.data.info });
+    res.status(200).json({
+      records: response.data.records,
+      pageInfo: {
+        page: response.data.info.page,
+        pages: response.data.info.pages,
+        totalrecords: response.data.info.totalrecords,
+      },
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

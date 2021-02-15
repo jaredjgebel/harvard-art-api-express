@@ -22,13 +22,25 @@ function ArtObjectContainer() {
           event.preventDefault();
         }}
       >
+        <button
+          type="button"
+          disabled={page === 1}
+          onClick={() => {
+            setPage((prevPage) => {
+              setUrl(`/api/objects?page=${page - 1}&query=${query}`);
+              return page - 1;
+            });
+          }}
+        >
+          Previous Page
+        </button>
         <input
           type="number"
           value={page}
           min={1}
           max={pageInfo?.pages}
           onChange={(event) => {
-            setPage(event.target.value);
+            setPage(parseInt(event.target.value));
           }}
         />
         <input
@@ -39,6 +51,19 @@ function ArtObjectContainer() {
             setPage(1);
           }}
         />
+        <button
+          type="button"
+          disabled={page === pageInfo?.pages}
+          onClick={() => {
+            setPage((prevPage) => {
+              setUrl(`/api/objects?page=${page + 1}&query=${query}`);
+              return prevPage + 1;
+            });
+          }}
+        >
+          {" "}
+          Next Page
+        </button>
         <button type="submit">Search</button>
       </form>
 

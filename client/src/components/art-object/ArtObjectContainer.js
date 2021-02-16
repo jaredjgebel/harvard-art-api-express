@@ -27,8 +27,8 @@ function ArtObjectContainer() {
           disabled={page === 1}
           onClick={() => {
             setPage((prevPage) => {
-              setUrl(`/api/objects?page=${page - 1}&query=${query}`);
-              return page - 1;
+              setUrl(`/api/objects?page=${prevPage - 1}&query=${query}`);
+              return prevPage - 1;
             });
           }}
         >
@@ -56,7 +56,7 @@ function ArtObjectContainer() {
           disabled={page === pageInfo?.pages}
           onClick={() => {
             setPage((prevPage) => {
-              setUrl(`/api/objects?page=${page + 1}&query=${query}`);
+              setUrl(`/api/objects?page=${prevPage + 1}&query=${query}`);
               return prevPage + 1;
             });
           }}

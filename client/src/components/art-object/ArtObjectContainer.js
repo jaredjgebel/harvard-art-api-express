@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 import ArtObject from "./ArtObject";
 import useApi from "../../hooks/useApi";
+import classifications from "../../data/classifications.json";
 
 function ArtObjectContainer() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
+  const [mediumId, setMediumId] = useState("");
 
   const [{ data, isLoading, isError }, setUrl] = useApi("/api/objects?page=1", {
     hits: [],
@@ -18,7 +20,9 @@ function ArtObjectContainer() {
     <>
       <form
         onSubmit={(event) => {
-          setUrl(`/api/objects?page=${page}&query=${query}`);
+          setUrl(
+            `/api/objects?page=${page}&query=${query}&classification=${mediumId}`
+          );
           event.preventDefault();
         }}
       >
@@ -27,7 +31,11 @@ function ArtObjectContainer() {
           disabled={page === 1}
           onClick={() => {
             setPage((prevPage) => {
-              setUrl(`/api/objects?page=${prevPage - 1}&query=${query}`);
+              setUrl(
+                `/api/objects?page=${
+                  prevPage - 1
+                }&query=${query}&classification=${mediumId}`
+              );
               return prevPage - 1;
             });
           }}
@@ -56,7 +64,11 @@ function ArtObjectContainer() {
           disabled={page === pageInfo?.pages}
           onClick={() => {
             setPage((prevPage) => {
-              setUrl(`/api/objects?page=${prevPage + 1}&query=${query}`);
+              setUrl(
+                `/api/objects?page=${
+                  prevPage + 1
+                }&query=${query}&classification=${mediumId}`
+              );
               return prevPage + 1;
             });
           }}
@@ -64,6 +76,29 @@ function ArtObjectContainer() {
           {" "}
           Next Page
         </button>
+
+        <label htmlFor="classification-select">Medium</label>
+        <select
+          name="classification-select"
+          value={mediumId}
+          onChange={(event) => {
+            setMediumId(event.target.value);
+            setPage(1);
+          }}
+        >
+          <option value=""></option>
+          {classifications.map((classification) => {
+            return (
+              <option
+                value={classification.classificationid}
+                key={classification.id}
+              >
+                {classification.name}
+              </option>
+            );
+          })}
+        </select>
+
         <button type="submit">Search</button>
       </form>
 

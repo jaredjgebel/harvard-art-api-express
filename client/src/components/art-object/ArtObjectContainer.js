@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import ArtObject from "./ArtObject";
 import useApi from "../../hooks/useApi";
 import classifications from "../../data/classifications.json";
+import styles from "./ArtObjectContainer.module.css";
+
+const createUrl = (page, query, mediumId) =>
+  `/api/objects?page=${page || ""}&query=${query || ""}&classification=${
+    mediumId || ""
+  }`;
 
 function ArtObjectContainer() {
   const [query, setQuery] = useState("");
@@ -19,10 +25,9 @@ function ArtObjectContainer() {
   return (
     <>
       <form
+        className={styles.form}
         onSubmit={(event) => {
-          setUrl(
-            `/api/objects?page=${page}&query=${query}&classification=${mediumId}`
-          );
+          setUrl(createUrl(page, query, mediumId));
           event.preventDefault();
         }}
       >
@@ -31,11 +36,7 @@ function ArtObjectContainer() {
           disabled={page === 1}
           onClick={() => {
             setPage((prevPage) => {
-              setUrl(
-                `/api/objects?page=${
-                  prevPage - 1
-                }&query=${query}&classification=${mediumId}`
-              );
+              setUrl(createUrl(prevPage - 1, query, mediumId));
               return prevPage - 1;
             });
           }}
@@ -53,6 +54,7 @@ function ArtObjectContainer() {
         />
         <input
           type="text"
+          name="query"
           value={query}
           onChange={(event) => {
             setQuery(event.target.value);
@@ -64,11 +66,7 @@ function ArtObjectContainer() {
           disabled={page === pageInfo?.pages}
           onClick={() => {
             setPage((prevPage) => {
-              setUrl(
-                `/api/objects?page=${
-                  prevPage + 1
-                }&query=${query}&classification=${mediumId}`
-              );
+              setUrl(createUrl(prevPage + 1, query, mediumId));
               return prevPage + 1;
             });
           }}

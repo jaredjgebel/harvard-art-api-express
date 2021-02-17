@@ -1,2 +1,40 @@
 .form {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  row-gap: 2rem;
+
+  font-size: 2rem;
+}
+
+.titleLabel,
+.mediumLabel,
+.pageLabel {
+  grid-column: 3 / span 2;
+  padding-right: 1rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.titleInput,
+.mediumInput,
+.pageInput {
+  grid-column: 5 / span 2;
+}
+
+.searchButton {
+  grid-column: 3 / span 4;
+}
+
+.prevButton {
+  grid-column: 2 / span 2;
+}
+
+.nextButton {
+  grid-column: 6 / span 2;
+}
+
+.prevButton,
+.nextButton {
+  margin-bottom: 2rem;
 }

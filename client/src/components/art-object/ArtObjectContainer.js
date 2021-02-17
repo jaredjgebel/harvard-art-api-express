@@ -31,28 +31,11 @@ function ArtObjectContainer() {
           event.preventDefault();
         }}
       >
-        <button
-          type="button"
-          disabled={page === 1}
-          onClick={() => {
-            setPage((prevPage) => {
-              setUrl(createUrl(prevPage - 1, query, mediumId));
-              return prevPage - 1;
-            });
-          }}
-        >
-          Previous Page
-        </button>
+        <label className={styles.titleLabel} htmlFor="query">
+          Title includes
+        </label>
         <input
-          type="number"
-          value={page}
-          min={1}
-          max={pageInfo?.pages}
-          onChange={(event) => {
-            setPage(parseInt(event.target.value));
-          }}
-        />
-        <input
+          className={styles.titleInput}
           type="text"
           name="query"
           value={query}
@@ -61,22 +44,12 @@ function ArtObjectContainer() {
             setPage(1);
           }}
         />
-        <button
-          type="button"
-          disabled={page === pageInfo?.pages}
-          onClick={() => {
-            setPage((prevPage) => {
-              setUrl(createUrl(prevPage + 1, query, mediumId));
-              return prevPage + 1;
-            });
-          }}
-        >
-          {" "}
-          Next Page
-        </button>
 
-        <label htmlFor="classification-select">Medium</label>
+        <label className={styles.mediumLabel} htmlFor="classification-select">
+          Medium
+        </label>
         <select
+          className={styles.mediumInput}
           name="classification-select"
           value={mediumId}
           onChange={(event) => {
@@ -97,7 +70,53 @@ function ArtObjectContainer() {
           })}
         </select>
 
-        <button type="submit">Search</button>
+        <label className={styles.pageLabel} htmlFor="page-number">
+          Page
+        </label>
+        <input
+          className={styles.pageInput}
+          type="number"
+          name="page-number"
+          value={page}
+          min={1}
+          max={pageInfo?.pages}
+          onChange={(event) => {
+            setPage(parseInt(event.target.value));
+          }}
+        />
+
+        <button className={styles.searchButton} type="submit">
+          Search
+        </button>
+
+        <button
+          className={styles.prevButton}
+          type="button"
+          disabled={page === 1}
+          onClick={() => {
+            setPage((prevPage) => {
+              setUrl(createUrl(prevPage - 1, query, mediumId));
+              return prevPage - 1;
+            });
+          }}
+        >
+          Previous Page
+        </button>
+
+        <button
+          className={styles.nextButton}
+          type="button"
+          disabled={page === pageInfo?.pages}
+          onClick={() => {
+            setPage((prevPage) => {
+              setUrl(createUrl(prevPage + 1, query, mediumId));
+              return prevPage + 1;
+            });
+          }}
+        >
+          {" "}
+          Next Page
+        </button>
       </form>
 
       {isError && <p>Something went wrong. Please try again. </p>}

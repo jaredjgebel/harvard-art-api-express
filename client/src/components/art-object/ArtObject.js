@@ -3,16 +3,26 @@ import styles from "./ArtObject.module.css";
 
 const ArtObject = ({ object }) => (
   <>
-    <p>{object.title}</p>
-    <img
-      className={styles.image}
-      src={object.primaryimageurl}
-      alt={object.title}
-    />
-    <p>{object.century}</p>
-    <p>{object.classification}</p>
-    <p>{object.creditline}</p>
-    <p>{object.url}</p>
+    <a
+      className={styles.url}
+      href={object.url}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <h2 className={styles.title}>{object.title}</h2>
+    </a>
+    <div className={styles.info}>
+      <div>{object.century}</div>
+      <div>{object.classification}</div>
+    </div>
+    <div className={styles.imageContainer}>
+      <img
+        className={styles.image}
+        src={object.primaryimageurl}
+        alt={object.title}
+      />
+    </div>
+    <p className={styles.credit}>{object.creditline}</p>
   </>
 );
 

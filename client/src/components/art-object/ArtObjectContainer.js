@@ -36,7 +36,7 @@ function ArtObjectContainer() {
         </label>
         <input
           className={styles.titleInput}
-          type="text"
+          type="search"
           name="query"
           value={query}
           onChange={(event) => {
@@ -125,11 +125,11 @@ function ArtObjectContainer() {
         <p>Loading...</p>
       ) : (
         <>
-          <div className="page-info">
-            <p>
+          <div className={styles.pageInfo}>
+            <div>
               Page {pageInfo?.page} of {pageInfo?.pages}
-            </p>
-            <p>{pageInfo?.totalrecords} total results found</p>
+            </div>
+            <div>{pageInfo?.totalrecords} total results found</div>
           </div>
           <ul>
             {hits.length &&

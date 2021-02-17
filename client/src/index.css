@@ -44,3 +44,20 @@ html {
 body {
   font-size: 1.6rem;
 }
+
+button,
+input {
+  background-color: aliceblue;
+  border: 2px solid aliceblue;
+  border-radius: 5px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 1px 1px 3px black;
+}
+
+button:active {
+  transform: scale(1);
+  filter: brightness(0.9);
+}

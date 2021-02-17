@@ -6,13 +6,6 @@
   font-size: 2rem;
 }
 
-button,
-input {
-  background-color: aliceblue;
-  border: 2px solid aliceblue;
-  border-radius: 5px;
-}
-
 .titleLabel,
 .mediumLabel,
 .pageLabel {

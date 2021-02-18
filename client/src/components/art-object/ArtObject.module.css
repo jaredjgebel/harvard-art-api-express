@@ -1,3 +1,14 @@
+.artObjectContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.artObjectContents {
+  max-width: 80rem;
+}
+
 .url {
   text-align: center;
 }
@@ -17,11 +28,11 @@
   display: flex;
   justify-content: center;
   padding: 2rem 0;
+  min-width: 80vh;
 }
 
 .image {
   width: 80%;
-  min-height: 80vh;
 }
 
 .credit {
@@ -29,4 +40,18 @@
   font-style: italic;
   text-align: center;
   padding: 1rem 1rem;
+}
+
+.modalContainer {
+  position: relative;
+  z-index: 19;
+}
+
+.modal {
+  width: 85%;
+  position: absolute;
+  background-color: slategray;
+  z-index: 20;
+  bottom: -5rem;
+  left: 5rem;
 }

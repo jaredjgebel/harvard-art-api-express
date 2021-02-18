@@ -10,7 +10,7 @@ router.get("/objects", cors(), async (req, res) => {
 
   let config = {
     method: "get",
-    url: `https://api.harvardartmuseums.org/object?apikey=${process.env.APIKEY}&hasimage=1&page=${page}&title=${searchTerm}&classification=${classification}`,
+    url: `https://api.harvardartmuseums.org/object?apikey=${process.env.APIKEY}&hasimage=1&page=${page}&title=${searchTerm}&classification=${classification}&q=imagepermissionlevel:0`,
   };
 
   try {

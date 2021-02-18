@@ -16,10 +16,25 @@
   justify-content: flex-end;
 }
 
+@media (min-width: 900px) {
+  .titleLabel,
+  .mediumLabel,
+  .pageLabel {
+    grid-column: 3 / span 2;
+  }
+}
 .titleInput,
 .mediumInput,
 .pageInput {
   grid-column: 4 / span 4;
+}
+
+@media (min-width: 900px) {
+  .titleInput,
+  .mediumInput,
+  .pageInput {
+    grid-column: 5 / span 3;
+  }
 }
 
 .titleInput:focus,
@@ -35,12 +50,28 @@
   grid-column: 3 / span 4;
 }
 
+@media (min-width: 900px) {
+  .searchButton {
+    grid-column: 4 / span 2;
+  }
+}
+
 .prevButton {
   grid-column: 2 / span 2;
 }
 
 .nextButton {
   grid-column: 6 / span 2;
+}
+
+@media (min-width: 900px) {
+  .prevButton {
+    grid-column: 3 / span 1;
+  }
+
+  .nextButton {
+    grid-column: 6 / span 1;
+  }
 }
 
 .prevButton,

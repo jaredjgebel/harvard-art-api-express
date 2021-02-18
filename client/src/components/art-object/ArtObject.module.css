@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 4rem 0 0 0;
 }
 
 .artObjectContents {
@@ -52,6 +53,19 @@
   position: absolute;
   background-color: slategray;
   z-index: 20;
-  bottom: -5rem;
+  bottom: -28rem;
   left: 5rem;
+  padding: 2rem 2rem;
+}
+
+.modalItem {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  padding: 1rem 1rem;
+}
+
+.modalItem p {
+  text-align: right;
+  padding: 0 2rem;
+  font-style: italic;
 }

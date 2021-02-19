@@ -1,0 +1,26 @@
+.modalContainer {
+  position: relative;
+  z-index: 19;
+}
+
+.modal {
+  width: 85%;
+  position: absolute;
+  background-color: slategray;
+  z-index: 20;
+  bottom: -28rem;
+  left: 5rem;
+  padding: 2rem 2rem;
+}
+
+.modalItem {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  padding: 1rem 1rem;
+}
+
+.modalItem p {
+  text-align: right;
+  padding: 0 2rem;
+  font-style: italic;
+}

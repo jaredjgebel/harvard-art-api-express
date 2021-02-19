@@ -19,9 +19,10 @@ const ArtObject = ({ object }) => {
           </a>
 
           <div className={styles.info}>
-            <div>{object.century}</div>
+            <div className={styles.infoItem}>{object.century}</div>
             {infoVisible ? (
               <button
+                className={styles.infoItem}
                 onClick={() => {
                   setInfoVisible(false);
                 }}
@@ -29,9 +30,14 @@ const ArtObject = ({ object }) => {
                 Back
               </button>
             ) : (
-              <button onClick={() => setInfoVisible(true)}>More Info</button>
+              <button
+                className={styles.infoItem}
+                onClick={() => setInfoVisible(true)}
+              >
+                More Info
+              </button>
             )}
-            <div>{object.classification}</div>
+            <div className={styles.infoItem}>{object.classification}</div>
           </div>
 
           {infoVisible && (

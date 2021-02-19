@@ -19,10 +19,18 @@
 }
 
 .info {
-  display: flex;
-
-  justify-content: space-between;
   margin: 0 1rem;
+
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  transform: translate(-1rem);
+}
+
+.infoItem {
+  display: inline-block;
+  margin: 0 2rem;
+  min-width: 12rem;
 }
 
 .imageContainer {

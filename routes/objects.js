@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const throttle = require("express-throttle");
 const router = express.Router();
 const axios = require("axios");
 
-router.get("/objects", cors(), async (req, res) => {
+router.get("/objects", cors(), throttle({ rate: "1/s" }), async (req, res) => {
   const page = (req && req.query && req.query.page) || 1;
   const searchTerm = (req && req.query && req.query.query) || "";
   const classification = (req.query && req.query.classification) || "";

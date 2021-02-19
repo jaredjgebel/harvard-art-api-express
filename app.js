@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
@@ -11,6 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const objectsRouter = require("./routes/objects");
 app.use("/api", objectsRouter);
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 const host = "localhost";
 const port = 5000;

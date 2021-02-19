@@ -6,11 +6,13 @@
 .modal {
   width: 85%;
   position: absolute;
-  background-color: slategray;
+  background-color: #a3b0bd;
   z-index: 20;
-  bottom: -28rem;
+  top: 2rem;
   left: 5rem;
   padding: 2rem 2rem;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px darkslategray;
 }
 
 .modalItem {

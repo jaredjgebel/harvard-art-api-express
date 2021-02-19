@@ -1,0 +1,10 @@
+.start {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.start button {
+  font-size: 3.6rem;
+  padding: 1rem;
+}

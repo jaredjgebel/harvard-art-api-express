@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import ArtObjectContainer from "./components/art-object/ArtObjectContainer";
 import Header from "./components/header/Header";
+import styles from "./App.module.css";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Link to="/objects">Objects</Link>
+          <Link to="/objects" className={styles.start}>
+            <button>Start</button>
+          </Link>
         </Route>
         <Route path="/objects">
           <ArtObjectContainer />

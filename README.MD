@@ -2,6 +2,10 @@
 
 This project was an opportunity to explore the Harvard Art Museums API, which provides information on works throughout their museums. This interface allows the user to search by title and medium of the work, as well as browse through the collection.
 
+## Technologies Used
+
+React, CSS Modules, Express
+
 ## Credits
 
 _All images are the property of Harvard Art Museums_

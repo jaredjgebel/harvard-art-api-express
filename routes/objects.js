@@ -4,7 +4,7 @@ const throttle = require("express-throttle");
 const router = express.Router();
 const axios = require("axios");
 
-router.get("/objects", throttle({ rate: "1/s" }), async (req, res) => {
+router.get("/objects", async (req, res) => {
   const page = (req && req.query && req.query.page) || 1;
   const searchTerm = (req && req.query && req.query.query) || "";
   const classification = (req.query && req.query.classification) || "";
@@ -25,6 +25,7 @@ router.get("/objects", throttle({ rate: "1/s" }), async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(message);
     res.status(404).json({ message: error.message });
   }
 });

@@ -131,14 +131,17 @@ function ArtObjectContainer() {
             </div>
             <div>{pageInfo?.totalrecords} total results found</div>
           </div>
-          <ul>
-            {hits.length &&
-              hits.map((item) => (
-                <li key={item.id}>
-                  <ArtObject object={item} />
-                </li>
-              ))}
-          </ul>
+
+          <div className={styles.artObjectWrapper}>
+            <ul>
+              {hits.length &&
+                hits.map((item) => (
+                  <li key={item.id}>
+                    <ArtObject object={item} />
+                  </li>
+                ))}
+            </ul>
+          </div>
         </>
       )}
     </>

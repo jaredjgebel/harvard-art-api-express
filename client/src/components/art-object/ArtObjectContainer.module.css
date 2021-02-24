@@ -20,20 +20,20 @@
   .titleLabel,
   .mediumLabel,
   .pageLabel {
-    grid-column: 3 / span 2;
+    grid-column: 2 / span 2;
   }
 }
 .titleInput,
 .mediumInput,
 .pageInput {
-  grid-column: 4 / span 4;
+  grid-column: 4 / span 2;
 }
 
 @media (min-width: 900px) {
   .titleInput,
   .mediumInput,
   .pageInput {
-    grid-column: 5 / span 3;
+    grid-column: 4 / span 2;
   }
 }
 
@@ -47,12 +47,13 @@
 }
 
 .searchButton {
-  grid-column: 3 / span 4;
+  grid-column: 4 / span 2;
 }
 
 @media (min-width: 900px) {
   .searchButton {
     grid-column: 4 / span 2;
+    margin: 0 3rem;
   }
 }
 

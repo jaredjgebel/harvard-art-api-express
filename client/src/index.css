@@ -49,6 +49,7 @@ input {
   background-color: aliceblue;
   border: 2px solid aliceblue;
   border-radius: 5px;
+  font-size: 1.8rem;
 }
 
 button:hover {

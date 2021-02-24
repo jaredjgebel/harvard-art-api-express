@@ -25,6 +25,7 @@ router.get("/objects", cors(), throttle({ rate: "1/s" }), async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(message);
     res.status(404).json({ message: error.message });
   }
 });

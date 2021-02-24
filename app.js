@@ -20,7 +20,7 @@ app.get("*", (req, res) => {
 });
 
 const host = "localhost";
-const port = 5000;
+const port = process.env.NODE_ENV === "production" ? process.env.PORT : 5000;
 
 let args;
 // eslint-disable-next-line no-unused-expressions

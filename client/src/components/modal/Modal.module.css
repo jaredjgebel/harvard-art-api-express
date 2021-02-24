@@ -9,7 +9,7 @@
   background-color: #a3b0bd;
   z-index: 20;
   top: 2rem;
-  left: 5rem;
+  left: 5.75rem;
   padding: 2rem 2rem;
   border-radius: 5px;
   box-shadow: 1px 1px 3px darkslategray;
@@ -25,4 +25,8 @@
   text-align: right;
   padding: 0 2rem;
   font-style: italic;
+}
+
+.modalSpan {
+  grid-column: 2 / -1;
 }

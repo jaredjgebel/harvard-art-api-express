@@ -78,8 +78,8 @@ function Modal({ object }) {
           <div className={styles.modalItem}>
             <p>People</p>
             {object.people.map((person) => (
-              <span key={object.id}>
-                {person.name}, {person.role}
+              <span className={styles.modalSpan} key={object.id}>
+                {person.name}, {person.role} <br />
               </span>
             ))}
           </div>

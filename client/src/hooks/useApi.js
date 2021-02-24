@@ -42,7 +42,6 @@ const useApi = (initialUrl, initialData) => {
 
       try {
         const result = await axios(url);
-        console.log("result", result.data);
 
         dispatch({
           type: "FETCH_SUCCESS",

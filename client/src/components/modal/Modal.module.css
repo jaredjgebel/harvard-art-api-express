@@ -15,6 +15,12 @@
   box-shadow: 1px 1px 3px darkslategray;
 }
 
+@media (max-width: 500px) {
+  .modal {
+    left: 2.5rem;
+  }
+}
+
 .modalItem {
   display: grid;
   grid-template-columns: 1fr 1.5fr;

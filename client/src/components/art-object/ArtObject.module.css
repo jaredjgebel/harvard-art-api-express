@@ -25,10 +25,18 @@
 .info {
   margin: 0 1rem;
 
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
   text-align: center;
   transform: translate(-1rem);
+}
+
+@media (max-width: 425px) {
+  .info button {
+    order: 1;
+  }
 }
 
 .infoItem {
@@ -37,11 +45,16 @@
   width: 12rem;
 }
 
+@media (max-width: 500px) {
+  .infoItem {
+    margin: 1rem 1rem;
+  }
+}
+
 .imageContainer {
   display: flex;
   justify-content: center;
   padding: 2rem 0;
-  min-width: 80vh;
 }
 
 .image {
